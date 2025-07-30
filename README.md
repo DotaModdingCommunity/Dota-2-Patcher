@@ -4,7 +4,7 @@ Small utility tool to enable custom mods in Dota 2
 
 ## Usage
 1. Launch the tool
-2. Place mods in  `...\dota 2 beta\game\DotaModdingCommunityMods' folder
+2. Place mods in  `...\dota 2 beta\game\DotaModdingCommunityMods` folder
 ### Optionally
 1. Move executable to dota folder (example: `...\steamapps\common\dota 2 beta`)
 2. Add `cmd /c "start /b DMC_Dota2_Patcher.exe %command%"` to the Dota 2 launch options

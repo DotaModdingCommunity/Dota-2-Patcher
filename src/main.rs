@@ -4,10 +4,11 @@ use std::path::{Path, PathBuf};
 use std::thread::sleep;
 use std::time::Duration;
 use std::env;
-use std::process::Command;
+use std::process::{exit, Command};
 use sha1::{Sha1, Digest};
 use crc::Crc;
 use steamlocate::SteamDir;
+
 
 fn get_paths() -> (PathBuf, PathBuf, PathBuf) {
     let steam_dir = SteamDir::locate().expect("Could not find Steam installation");
@@ -20,6 +21,35 @@ fn get_paths() -> (PathBuf, PathBuf, PathBuf) {
     let mod_dir_path = PathBuf::new().join(&game_path).join("game").join("DotaModdingCommunityMods");
 
     return (gameinfo_path, dota_signatures_path, mod_dir_path)
+}
+
+fn is_dota2_running() -> bool {
+    #[cfg(target_os = "windows")]
+    {
+        let output = Command::new("tasklist")
+            .output()
+            .expect("Failed to execute tasklist");
+        let tasks = String::from_utf8_lossy(&output.stdout);
+        tasks.contains("dota2.exe")
+    }
+
+    #[cfg(target_os = "linux")]
+    {
+        let output = Command::new("pgrep")
+            .arg("dota2")
+            .output()
+            .expect("Failed to execute pgrep");
+        !output.stdout.is_empty()
+    }
+
+    #[cfg(target_os = "macos")]
+    {
+        let output = Command::new("pgrep")
+            .arg("Dota 2")
+            .output()
+            .expect("Failed to execute pgrep");
+        !output.stdout.is_empty()
+    }
 }
 
 fn validate_patch_state(gameinfo_path:&PathBuf, dota_signatures_path:&PathBuf) -> (bool, bool){
@@ -168,6 +198,11 @@ fn main() {
 ░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░▒
   ░░            ░░░░░░░░░░░░░░░░░░░░░░░░░    "#);
+        if is_dota2_running() {
+            println!("Dota 2 is currently running! Close it and try again.");
+            sleep(Duration::from_secs(8));
+            exit(1)
+        }
         let (gameinfo_path, dota_signatures_path, mod_dir_path) = get_paths();
         let (gameinfo_patched,dota_signatures_patched) = validate_patch_state(&gameinfo_path, &dota_signatures_path);
         if !gameinfo_patched {

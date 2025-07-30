@@ -10,6 +10,5 @@ crc = "3.0"
 steamlocate = "2.0.1"
 better-vdf = "0.1.0"
 
-
 [build-dependencies]
 winres = "0.1"

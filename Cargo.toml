@@ -1,0 +1,15 @@
+[package]
+name = "DMC_Dota2_Patcher"
+version = "1.0.0"
+edition = "2024"
+build = "build.rs"
+
+[dependencies]
+sha1 = "0.10"
+crc = "3.0"
+steamlocate = "2.0.1"
+better-vdf = "0.1.0"
+
+
+[build-dependencies]
+winres = "0.1"

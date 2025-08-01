@@ -7,7 +7,7 @@ Small utility tool to enable custom mods in Dota 2
 2. Place mods in  `...\dota 2 beta\game\DotaModdingCommunityMods` folder
 ### Optionally
 1. Move executable to dota folder (example: `...\steamapps\common\dota 2 beta`)
-2. Add `cmd /c "start /b DMC_Dota2_Patcher.exe %command%"` at the START of Dota 2 launch options
+2. Add `cmd /c "start /b DMC_Dota2_Patcher.exe %command%"` at the **START** of Dota 2 launch options
 3. Place mods in  `...\dota 2 beta\game\DotaModdingCommunityMods` folder
 Every time you launch Dota 2 using steam, it will verify patch state(patch if needed) and launch the game
 So you don't need to patch the game manually everytime it updates

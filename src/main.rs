@@ -176,7 +176,7 @@ fn modify_dota_signatures(dota_signatures_path: &PathBuf, sha1:String, crc32:Str
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() <2 {
-        println!(r#"   Dota Modding Community Patcher v 1.0.0
+        println!(r#"   Dota Modding Community Patcher v 1.0.1
 ▒▒▒▒▒▒▒▒▒▒▒     ▒▒▒▒▒▒▒▒▒▒▒   ░▒▒▒▒▒▒▒▒▒▒▒▒▒ 
 ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ░░▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒

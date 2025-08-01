@@ -105,32 +105,35 @@ fn modify_gameinfo(gameinfo_path: &PathBuf) {
     let mut file = File::open(gameinfo_path).expect("Unable to open gameinfo_branchspecific.gi");
     let mut contents = String::new();
     file.read_to_string(&mut contents).expect("Unable to read gameinfo_branchspecific.gi");
-    let mut lines: Vec<&str> = contents.lines().collect();
-    let line_index = lines.len() - 2;
-    let insert = r#"		SearchPaths // Patched by DotaModdingCommunity Patcher
-		{
-			Game_Language		dota_*LANGUAGE*
+    let file_system_index = contents.find("FileSystem").expect("Unable to find filesystem");
+    let (prefix, temp_suffix) = contents.split_at_mut_checked(file_system_index).expect("Unable to split the contents");
+    let braket_index = temp_suffix.find("}").expect("Unable to find end of the filesystem brackets");
+    let (body,suffix, ) = temp_suffix.split_at_mut_checked(braket_index).expect("Unable to split end of the insertion");
+    let insert = r#"
+        SearchPaths // Patched by DotaModdingCommunity Patcher
+        {
+            Game_Language		dota_*LANGUAGE*
 
-			Game_LowViolence	dota_lv
+            Game_LowViolence	dota_lv
 
-			Game				DotaModdingCommunityMods
-			Game				dota
-			Game				core
+            Game				DotaModdingCommunityMods
+            Game				dota
+            Game				core
 
-			Mod					DotaModdingCommunityMods
-			Mod					dota
+            Mod					DotaModdingCommunityMods
+            Mod					dota
 
-			Write				dota
+            Write				dota
 
-			AddonRoot_Language	dota_*LANGUAGE*_addons
+            AddonRoot_Language	dota_*LANGUAGE*_addons
 
-			AddonRoot			dota_addons
+            AddonRoot			dota_addons
 
-			PublicContent		dota_core
-			PublicContent		core
-		}"#;
-    lines.insert(line_index, insert);
-    let new_content = lines.join("\n");
+            PublicContent		dota_core
+            PublicContent		core
+        }
+    "#;
+    let new_content = prefix.to_string().to_owned() + body + insert + suffix;
     write(gameinfo_path, new_content).expect("Unable to write changes to gameinfo_branchspecifi.gi");
 }
 

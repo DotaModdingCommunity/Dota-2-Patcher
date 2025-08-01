@@ -1,5 +1,6 @@
 # Dota Modding Community Patcher
 
+<img width="1210" height="600" alt="image" src="https://github.com/user-attachments/assets/ff1265b5-6797-4ae0-8655-23bff1ee6c34" />
 Small utility tool to enable custom mods in Dota 2
 
 ## Usage
@@ -7,10 +8,10 @@ Small utility tool to enable custom mods in Dota 2
 2. Place mods in  `...\dota 2 beta\game\DotaModdingCommunityMods` folder
 ### Optionally
 1. Move executable to dota folder (example: `...\steamapps\common\dota 2 beta`)
-2. Add `cmd /c "start /b DMC_Dota2_Patcher.exe %command%"` to the Dota 2 launch options
+2. Add `cmd /c "start /b DMC_Dota2_Patcher.exe %command%"` at the **START** of Dota 2 launch options
 3. Place mods in  `...\dota 2 beta\game\DotaModdingCommunityMods` folder
-Every time you launch Dota 2 using steam, it will verify patch state(patch if needed) and launch the game.
-So you don't need to patch the game manually everytime it updates.
+Every time you launch Dota 2 using steam, it will verify patch state(patch if needed) and launch the game
+So you don't need to patch the game manually everytime it updates
 
 # Revert to original files
 Tool makes backup of gameinfo_branchspecific.gi and dota.signatures in their respective locations:

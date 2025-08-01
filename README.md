@@ -1,5 +1,6 @@
 # Dota Modding Community Patcher
 
+<img width="1210" height="600" alt="image" src="https://github.com/user-attachments/assets/ff1265b5-6797-4ae0-8655-23bff1ee6c34" />
 Small utility tool to enable custom mods in Dota 2
 
 ## Usage
